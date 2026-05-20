@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)file:///C:/Users/loreto.cruz/Downloads/simulador_unab_institucional.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador Comercial 2026–27 · UNAB</title>
+<link href="./index_files/css2" rel="stylesheet">
+<script src="./index_files/chart.umd.js.descarga"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:    #03102C;
+  --navy2:   #071629;
+  --navy3:   #0D1E3A;
+  --red:     #A90429;
+  --red2:    #8C0322;
+  --sky:     #1B5EA8;
+  --sky2:    #E8EFF8;
+  --green:   #1A6B3C;
+  --green2:  #E6F3EC;
+  --amber:   #8B5A00;
+  --amber2:  #FDF3E3;
+  --white:   #FFFFFF;
+  --offwhite:#F7F8FA;
+  --gray:    #EEF0F4;
+  --gray2:   #DDE1E9;
+  --border:  #C8CDD8;
+  --text:    #03102C;
+  --text2:   #3A4560;
+  --text3:   #7A8299;
+  --font:    'Barlow', sans-serif;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--offwhite);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  height: 5px;
+  background: linear-gradient(90deg, var(--navy) 60%, var(--red) 100%);
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--navy);
+  padding: 0 48px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.header-left { display: flex; align-items: center; gap: 20px; }
+.header-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.15); }
+.header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  text-transform: uppercase;
+}
+.header-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 2px;
+  font-style: italic;
+}
+.pills { display: flex; gap: 8px; }
+.pill {
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 3px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.04em;
+}
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+}
+
+/* ── LEFT PANEL ── */
+.left {
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.section-head {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--navy);
+  margin-bottom: 16px;
+}
+.year-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+.year-sub { font-size: 11px; color: var(--text3); margin-bottom: 16px; }
+
+.slider-group { display: flex; flex-direction: column; gap: 18px; }
+.sl-item {}
+.sl-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 7px; }
+.sl-name {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 500; color: var(--text);
+}
+.sl-dot { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.db { background: var(--sky); }
+.dp { background: var(--green); }
+.da { background: var(--amber); }
+.sl-right { text-align: right; }
+.sl-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--navy); line-height: 1;
+}
+.sl-price { font-size: 10px; color: var(--text3); margin-top: 1px; }
+
+input[type=range] {
+  -webkit-appearance: none; width: 100%; height: 4px;
+  background: var(--gray2); border-radius: 2px; outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; cursor: pointer;
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1px var(--border);
+}
+input.rb::-webkit-slider-thumb { background: var(--sky); box-shadow: 0 0 0 1px var(--sky); }
+input.rp::-webkit-slider-thumb { background: var(--green); box-shadow: 0 0 0 1px var(--green); }
+input.ra::-webkit-slider-thumb { background: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+
+.divider { border: none; border-top: 1px solid var(--gray); }
+
+.reset-btn {
+  padding: 10px;
+  background: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text2);
+  font-family: var(--font);
+  font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-align: center;
+}
+.reset-btn:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+/* ── RIGHT PANEL ── */
+.right {
+  padding: 24px 32px;
+  display: flex; flex-direction: column; gap: 18px;
+  background: var(--offwhite);
+  overflow: auto;
+}
+
+/* KPI ROW */
+.kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.kpi {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px 18px;
+  position: relative; overflow: hidden;
+}
+.kpi::after {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 4px; border-radius: 6px 0 0 6px;
+}
+.kpi.k1::after { background: var(--navy); }
+.kpi.k2::after { background: var(--green); }
+.kpi.k3::after { background: var(--red); }
+.kpi.k4::after { background: var(--text3); }
+.kpi-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 7px;
+}
+.kpi-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 3px;
+}
+.kpi-sub { font-size: 11px; color: var(--text2); }
+
+/* CHARTS */
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.chart-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 20px;
+}
+.card-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text3); margin-bottom: 14px;
+}
+.chart-wrap { position: relative; height: 185px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+.leg-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
+.leg-sq { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+
+/* INSIGHT */
+.insight {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--red);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 18px;
+  font-size: 13px; font-weight: 600;
+  color: var(--red2);
+}
+.insight.neutral { border-left-color: var(--text3); color: var(--text2); font-weight: 400; }
+
+/* FOOTER */
+.footer {
+  background: var(--navy);
+  padding: 12px 48px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 860px) {
+  .main { grid-template-columns: 1fr; }
+  .left { border-right: none; border-bottom: 1px solid var(--border); }
+  .header, .footer { padding-left: 20px; padding-right: 20px; }
+  .right { padding: 16px; }
+  .kpi-row { grid-template-columns: repeat(2,1fr); }
+  .charts-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"></div>
+
+<header class="header">
+  <div class="header-left">
+    <div>
+      <div class="header-title">Simulador de Escenarios Comerciales</div>
+      <div class="header-sub">Plan Comercial 2026–27 · Escenario Personalizado</div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="pills">
+      <span class="pill">5 visitas / día</span>
+      <span class="pill">100 colegios / mes</span>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- SLIDERS -->
+  <div class="left">
+
+    <div>
+      <p class="section-head">Año 2026</p>
+      <div class="year-label">2026</div>
+      <div class="year-sub">7 meses efectivos · Jun–Dic · ~600 colegios visitados</div>
+      <div class="slider-group">
+        <div class="sl-item">
+          <div class="sl-top">
+            <span class="sl-name"><span class="sl-dot db"></span>Cursos básicos</span>
+            <div class="sl-right"><div class="sl-count" id="v26b">50</div><div class="sl-price">$3.000.000 c/u</div></div>
+          </div>
+          <input type="range" class="rb" min="0" max="100" step="1" id="s26b" oninput="render()">
+        </div>
+        <div class="sl-item">
+          <div class="sl-top">
+            <span class="sl-name"><span class="sl-dot dp"></span>Cursos premium</span>
+            <div class="sl-right"><div class="sl-count" id="v26p">15</div><div class="sl-price">$8.000.000 promedio</div></div>
+          </div>
+          <input type="range" class="rp" min="0" max="30" step="1" id="s26p" oninput="render()">
+        </div>
+        <div class="sl-item">
+          <div class="sl-top">
+            <span class="sl-name"><span class="sl-dot da"></span>Asesorías</span>
+            <div class="sl-right"><div class="sl-count" id="v26a">4</div><div class="sl-price">$30.000.000 promedio</div></div>
+          </div>
+          <input type="range" class="ra" min="0" max="8" step="1" id="s26a" oninput="render()">
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div>
+      <p class="section-head">Año 2027</p>
+      <div class="year-label">2027</div>
+      <div class="year-sub">Año completo · 10 meses efectivos · ~1.000 colegios</div>
+      <div class="slider-group">
+        <div class="sl-item">
+          <div class="sl-top">
+            <span class="sl-name"><span class="sl-dot db"></span>Cursos básicos</span>
+            <div class="sl-right"><div class="sl-count" id="v27b">75</div><div class="sl-price">$3.000.000 c/u</div></div>
+          </div>
+          <input type="range" class="rb" min="0" max="150" step="1" id="s27b" oninput="render()">
+        </div>
+        <div class="sl-item">
+          <div class="sl-top">
+            <span class="sl-name"><span class="sl-dot dp"></span>Cursos premium</span>
+            <div class="sl-right"><div class="sl-count" id="v27p">25</div><div class="sl-price">$8.000.000 promedio</div></div>
+          </div>
+          <input type="range" class="rp" min="0" max="50" step="1" id="s27p" oninput="render()">
+        </div>
+        <div class="sl-item">
+          <div class="sl-top">
+            <span class="sl-name"><span class="sl-dot da"></span>Asesorías</span>
+            <div class="sl-right"><div class="sl-count" id="v27a">10</div><div class="sl-price">$30.000.000 promedio</div></div>
+          </div>
+          <input type="range" class="ra" min="0" max="20" step="1" id="s27a" oninput="render()">
+        </div>
+      </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetAll()">↺ &nbsp; Reiniciar todo</button>
+
+  </div>
+
+  <!-- RESULTADOS -->
+  <div class="right">
+
+    <div class="kpi-row">
+      <div class="kpi k1">
+        <div class="kpi-label">Ingresos 2026</div>
+        <div class="kpi-value" id="k26">$390M</div>
+        <div class="kpi-sub" id="k26u">69 programas</div>
+      </div>
+      <div class="kpi k2">
+        <div class="kpi-label">Ingresos 2027</div>
+        <div class="kpi-value" id="k27">$725M</div>
+        <div class="kpi-sub" id="k27u">110 programas</div>
+      </div>
+      <div class="kpi k3">
+        <div class="kpi-label">Total 2 años</div>
+        <div class="kpi-value" id="ktot">$1.1.000M</div>
+        <div class="kpi-sub">acumulado</div>
+      </div>
+      <div class="kpi k4">
+        <div class="kpi-label">Ticket promedio</div>
+        <div class="kpi-value" id="ktic">$6.2M</div>
+        <div class="kpi-sub">por programa</div>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="card-title">Ingresos por año y tipo (MM$)</div>
+        <div class="chart-wrap">
+          <canvas id="barChart" role="img" aria-label="Ingresos por tipo de servicio 2026 y 2027" width="424" height="185" style="display: block; box-sizing: border-box; height: 185px; width: 424px;"></canvas>
+        </div>
+        <div class="legend">
+          <div class="leg-item"><span class="leg-sq" style="background:#1B5EA8"></span>Cursos básicos</div>
+          <div class="leg-item"><span class="leg-sq" style="background:#1A6B3C"></span>Cursos premium</div>
+          <div class="leg-item"><span class="leg-sq" style="background:#8B5A00"></span>Asesorías</div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="card-title">Mix de ingresos — total 2 años</div>
+        <div class="chart-wrap">
+          <canvas id="donut" role="img" aria-label="Distribución de ingresos por tipo" width="424" height="185" style="display: block; box-sizing: border-box; height: 185px; width: 424px;"></canvas>
+        </div>
+        <div class="legend" id="donut-leg"><div class="leg-item"><span class="leg-sq" style="background:#1B5EA8"></span>Básicos 34%</div><div class="leg-item"><span class="leg-sq" style="background:#1A6B3C"></span>Premium 29%</div><div class="leg-item"><span class="leg-sq" style="background:#8B5A00"></span>Asesorías 38%</div></div>
+      </div>
+    </div>
+
+    <div class="insight" id="insight">Con 179 programas en 2 años proyectas $1.1.000M en ingresos (ticket promedio $6.2M). Las 14 asesorías representan el 38% del total — cada una equivale a 10 cursos básicos.</div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  Precios de referencia: Cursos básicos $3M &nbsp;·&nbsp; Cursos premium promedio $8M ($4M–$18M) &nbsp;·&nbsp; Asesorías promedio $30M ($25M–$40M) &nbsp;·&nbsp; Estacionalidad: vacaciones julio · 18 septiembre
+</footer>
+
+<script>
+let barChart, donutChart;
+
+function gv(id){ return parseInt(document.getElementById(id).value)||0; }
+function sv(id,v){ document.getElementById(id).value=v; }
+function calc(b,p,a){ return {rev:b*3+p*8+a*30, units:b+p+a, rB:b*3, rP:p*8, rA:a*30}; }
+
+function fmt(v){
+  if(v===0) return '$0';
+  if(v>=1000) return '$'+(v/1000).toFixed(v%1000===0?0:1)+'.000M';
+  return '$'+v.toLocaleString('es-CL')+'M';
+}
+
+function render(){
+  const b26=gv('s26b'), p26=gv('s26p'), a26=gv('s26a');
+  const b27=gv('s27b'), p27=gv('s27p'), a27=gv('s27a');
+
+  document.getElementById('v26b').textContent=b26;
+  document.getElementById('v26p').textContent=p26;
+  document.getElementById('v26a').textContent=a26;
+  document.getElementById('v27b').textContent=b27;
+  document.getElementById('v27p').textContent=p27;
+  document.getElementById('v27a').textContent=a27;
+
+  const y26=calc(b26,p26,a26), y27=calc(b27,p27,a27);
+  const tot=y26.rev+y27.rev;
+  const allU=y26.units+y27.units;
+  const ticket=allU>0?(tot/allU).toFixed(1):null;
+
+  document.getElementById('k26').textContent=fmt(y26.rev);
+  document.getElementById('k26u').textContent=y26.units+' programas';
+  document.getElementById('k27').textContent=fmt(y27.rev);
+  document.getElementById('k27u').textContent=y27.units+' programas';
+  document.getElementById('ktot').textContent=fmt(tot);
+  document.getElementById('ktic').textContent=ticket?'$'+ticket+'M':'—';
+
+  updateBar(y26,y27);
+  updateDonut(y26,y27,tot);
+  updateInsight(y26,y27,tot,allU,a26+a27,b26+b27);
+}
+
+function updateBar(y26,y27){
+  const d={
+    labels:['2026','2027'],
+    datasets:[
+      {label:'Básicos',   data:[y26.rB,y27.rB], backgroundColor:'#1B5EA8', borderRadius:3},
+      {label:'Premium',   data:[y26.rP,y27.rP], backgroundColor:'#1A6B3C', borderRadius:3},
+      {label:'Asesorías', data:[y26.rA,y27.rA], backgroundColor:'#8B5A00', borderRadius:3},
+    ]
+  };
+  const opts={
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:c=>' '+c.dataset.label+': $'+c.raw+'M'}}},
+    scales:{
+      x:{stacked:true, grid:{color:'#EEF0F4'}, ticks:{color:'#7A8299',font:{size:12,family:'Barlow'}}},
+      y:{stacked:true, grid:{color:'#EEF0F4'}, ticks:{color:'#7A8299',font:{size:11,family:'Barlow'},callback:v=>'$'+v+'M'}}
+    }
+  };
+  if(!barChart){ barChart=new Chart(document.getElementById('barChart'),{type:'bar',data:d,options:opts}); }
+  else { barChart.data=d; barChart.update(); }
+}
+
+function updateDonut(y26,y27,tot){
+  const rB=y26.rB+y27.rB, rP=y26.rP+y27.rP, rA=y26.rA+y27.rA;
+  const pct=v=>tot>0?Math.round(v/tot*100):0;
+  const d={
+    labels:['Básicos','Premium','Asesorías'],
+    datasets:[{data:[rB,rP,rA], backgroundColor:['#1B5EA8','#1A6B3C','#8B5A00'], borderWidth:2, borderColor:'#FFFFFF', hoverOffset:4}]
+  };
+  const opts={
+    responsive:true, maintainAspectRatio:false, cutout:'62%',
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:c=>' '+c.label+': $'+c.raw+'M ('+pct(c.raw)+'%)'}}}
+  };
+  if(!donutChart){ donutChart=new Chart(document.getElementById('donut'),{type:'doughnut',data:d,options:opts}); }
+  else { donutChart.data=d; donutChart.update(); }
+
+  if(tot===0){
+    document.getElementById('donut-leg').innerHTML='<div class="leg-item" style="color:var(--text3); font-style:italic">Mueve los sliders para ver el mix</div>';
+  } else {
+    document.getElementById('donut-leg').innerHTML=[
+      ['#1B5EA8','Básicos',rB],['#1A6B3C','Premium',rP],['#8B5A00','Asesorías',rA]
+    ].map(([c,l,v])=>`<div class="leg-item"><span class="leg-sq" style="background:${c}"></span>${l} ${pct(v)}%</div>`).join('');
+  }
+}
+
+function updateInsight(y26,y27,tot,allU,asesorias,basicos){
+  const el=document.getElementById('insight');
+  if(allU===0){
+    el.className='insight neutral';
+    el.textContent='Mueve los sliders para construir tu escenario y ver la proyección en tiempo real.';
+    return;
+  }
+  el.className='insight';
+  const ticket=allU>0?(tot/allU).toFixed(1):0;
+  let msg=`Con ${allU} programas en 2 años proyectas ${fmt(tot)} en ingresos (ticket promedio $${ticket}M).`;
+  if(asesorias>0){
+    const pctAseso=Math.round((asesorias*30)/tot*100);
+    msg+=` Las ${asesorias} asesorías representan el ${pctAseso}% del total — cada una equivale a 10 cursos básicos.`;
+  } else if(basicos>0){
+    msg+=' Considera agregar asesorías ($30M c/u): una sola equivale a ingresos de 10 cursos básicos.';
+  }
+  el.textContent=msg;
+}
+
+function resetAll(){
+  ['s26b','s26p','s26a','s27b','s27p','s27a'].forEach(id=>sv(id,0));
+  render();
+}
+
+render();
+</script>
+
+
+</body></html>
