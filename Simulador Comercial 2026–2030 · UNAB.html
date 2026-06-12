@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)file:///C:/Users/loreto.cruz/Downloads/simulador_2026_2030%20(1).html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador Comercial 2026–2030 · UNAB</title>
+<script src="./Simulador Comercial 2026–2030 · UNAB_files/chart.umd.min.js.descarga"></script>
+<style>
+:root{
+  --navy:#1B2A4A;
+  --navy-dark:#0F1E35;
+  --gold:#C9A227;
+  --red:#C0152C;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:linear-gradient(135deg,var(--navy-dark),var(--navy));
+  color:var(--white);
+  padding:24px;
+}
+.container{max-width:1200px;margin:0 auto;}
+header{
+  text-align:center;
+  margin-bottom:24px;
+  border-bottom:2px solid var(--gold);
+  padding-bottom:16px;
+}
+header h1{
+  margin:0;
+  font-size:2.2rem;
+  letter-spacing:1px;
+}
+header h1 span{color:var(--gold);}
+header p{color:#9fb3d1;margin:6px 0 0;}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+@media (max-width:900px){.grid{grid-template-columns:1fr;}}
+
+.card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:20px;
+}
+.card h2{
+  margin-top:0;
+  font-size:1.1rem;
+  color:var(--gold);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  padding-bottom:8px;
+}
+
+.slider-row{margin-bottom:16px;}
+.slider-row label{
+  display:flex;
+  justify-content:space-between;
+  font-size:0.92rem;
+  margin-bottom:4px;
+}
+.slider-row label .val{color:var(--gold);font-weight:bold;}
+input[type=range]{
+  width:100%;
+  accent-color:var(--gold);
+}
+input[type=number]{
+  width:90px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.2);
+  color:#fff;
+  border-radius:6px;
+  padding:4px 8px;
+  font-size:0.85rem;
+}
+.price-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  font-size:0.92rem;
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:20px 0;
+}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr);}}
+.kpi{
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+  padding:14px;
+  text-align:center;
+}
+.kpi .num{font-size:1.5rem;font-weight:bold;color:var(--gold);}
+.kpi .lab{font-size:0.75rem;color:#9fb3d1;margin-top:4px;}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+  font-size:0.85rem;
+}
+th,td{
+  padding:8px 6px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+th{color:var(--gold);font-weight:600;}
+td.met{color:#7CFC8B;font-weight:bold;}
+td.unmet{color:#FF8A8A;font-weight:bold;}
+
+.chart-wrap{position:relative;height:320px;margin-top:10px;}
+
+.note{
+  font-size:0.8rem;
+  color:#9fb3d1;
+  margin-top:14px;
+  line-height:1.5;
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:10px;
+}
+.reset{
+  display:block;
+  margin:20px auto 0;
+  background:var(--gold);
+  color:var(--navy-dark);
+  border:none;
+  padding:10px 24px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:0.95rem;
+}
+.team-table td:first-child, .team-table th:first-child{text-align:left;}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Simulador <span>Comercial 2026–2030</span></h1>
+  <p>Modelo de Escalamiento · Dirección de Educación Continua y Proyectos Educativos · UNAB</p>
+</header>
+
+<div class="kpis" id="kpis">
+    <div class="kpi"><div class="num">$19.910MM</div><div class="lab">Ingreso proyectado total 2026–2030</div></div>
+    <div class="kpi"><div class="num">$16.924MM</div><div class="lab">Meta acumulada del plan</div></div>
+    <div class="kpi"><div class="num">118%</div><div class="lab">Cumplimiento global del plan</div></div>
+    <div class="kpi"><div class="num">18.0MM</div><div class="lab">Ticket promedio por programa</div></div>
+  </div>
+
+<div class="grid">
+
+  <div class="card">
+    <h2>Productividad por vendedor (por año)</h2>
+
+    <div class="slider-row">
+      <label style="margin-bottom:10px;">Editando año:</label>
+      <div id="yearSelector" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+    <button class="yearBtn" data-year="2026" style="
+      padding:8px 14px;border-radius:6px;border:1px solid var(--gold);
+      background:var(--gold);
+      color:var(--navy-dark);
+      font-weight:bold;cursor:pointer;font-size:0.85rem;">2026</button>
+  
+    <button class="yearBtn" data-year="2027" style="
+      padding:8px 14px;border-radius:6px;border:1px solid var(--gold);
+      background:transparent;
+      color:var(--gold);
+      font-weight:bold;cursor:pointer;font-size:0.85rem;">2027</button>
+  
+    <button class="yearBtn" data-year="2028" style="
+      padding:8px 14px;border-radius:6px;border:1px solid var(--gold);
+      background:transparent;
+      color:var(--gold);
+      font-weight:bold;cursor:pointer;font-size:0.85rem;">2028</button>
+  
+    <button class="yearBtn" data-year="2029" style="
+      padding:8px 14px;border-radius:6px;border:1px solid var(--gold);
+      background:transparent;
+      color:var(--gold);
+      font-weight:bold;cursor:pointer;font-size:0.85rem;">2029</button>
+  
+    <button class="yearBtn" data-year="2030" style="
+      padding:8px 14px;border-radius:6px;border:1px solid var(--gold);
+      background:transparent;
+      color:var(--gold);
+      font-weight:bold;cursor:pointer;font-size:0.85rem;">2030</button>
+  </div>
+    </div>
+
+    <div class="slider-row">
+      <label>Cursos básicos / vendedor <span class="val" id="cbVal">10</span></label>
+      <input type="range" id="cb" min="0" max="60" value="10">
+    </div>
+    <div class="slider-row">
+      <label>Cursos premium / vendedor <span class="val" id="cpVal">5</span></label>
+      <input type="range" id="cp" min="0" max="20" value="5">
+    </div>
+    <div class="slider-row">
+      <label>Asesorías / vendedor <span class="val" id="asVal">2.0</span></label>
+      <input type="range" id="as" min="0" max="20" step="0.1" value="18">
+    </div>
+
+    <h2 style="margin-top:24px;">Precios de referencia</h2>
+    <div class="price-row">
+      <span>Curso básico (MM$)</span>
+      <input type="number" id="pcb" value="3">
+    </div>
+    <div class="price-row">
+      <span>Curso premium (MM$)</span>
+      <input type="number" id="pcp" value="8">
+    </div>
+    <div class="price-row">
+      <span>Asesoría (MM$)</span>
+      <input type="number" id="pas" value="30">
+    </div>
+
+    <div class="note">
+      Los sliders de arriba editan la productividad <b>solo del año seleccionado</b> en los botones. Cada año puede tener su propia combinación de cursos básicos, premium y asesorías por vendedor — esto te permite simular una curva de aprendizaje: por ejemplo, partir más bajo en 2026 e ir subiendo en los años siguientes.
+    </div>
+
+    <button class="reset" onclick="resetAll()">↺ Reiniciar a valores por defecto</button>
+  </div>
+
+  <div class="card">
+    <h2>Equipo comercial proyectado (modelo PDF)</h2>
+    <table class="team-table">
+      <thead><tr><th>Año</th><th>Planta UNAB</th><th>Externos</th><th>Total Vendedores</th><th>Meta (MM$)</th></tr></thead>
+      <tbody id="teamBody">
+    <tr>
+      <td>2026</td>
+      <td>1</td>
+      <td>2</td>
+      <td><b>3</b></td>
+      <td>$900</td>
+    </tr>
+    <tr>
+      <td>2027</td>
+      <td>1</td>
+      <td>4</td>
+      <td><b>5</b></td>
+      <td>$1.900</td>
+    </tr>
+    <tr>
+      <td>2028</td>
+      <td>2</td>
+      <td>5</td>
+      <td><b>7</b></td>
+      <td>$3.024</td>
+    </tr>
+    <tr>
+      <td>2029</td>
+      <td>2</td>
+      <td>8</td>
+      <td><b>10</b></td>
+      <td>$5.100</td>
+    </tr>
+    <tr>
+      <td>2030</td>
+      <td>3</td>
+      <td>7</td>
+      <td><b>10</b></td>
+      <td>$6.000</td>
+    </tr></tbody>
+    </table>
+
+    <h2 style="margin-top:24px;">Proyección vs Meta (MM$)</h2>
+    <div class="chart-wrap"><canvas id="chartMain" style="box-sizing: border-box; display: block; height: 320px; width: 548px;" width="548" height="320"></canvas></div>
+  </div>
+
+</div>
+
+<div class="card" style="margin-top:20px;">
+  <h2>Detalle por año</h2>
+  <table id="detailTable">
+    <thead>
+      <tr>
+        <th>Año</th>
+        <th>Vendedores</th>
+        <th>Cursos básicos</th>
+        <th>Cursos premium</th>
+        <th>Asesorías</th>
+        <th>Ingreso proyectado (MM$)</th>
+        <th>Meta (MM$)</th>
+        <th>Cumplimiento</th>
+      </tr>
+    </thead>
+    <tbody id="detailBody"><tr>
+      <td>2026</td>
+      <td>3</td>
+      <td>30.0</td>
+      <td>15.0</td>
+      <td>6.0</td>
+      <td><b>$390</b></td>
+      <td>$900</td>
+      <td class="unmet">43%</td>
+    </tr><tr>
+      <td>2027</td>
+      <td>5</td>
+      <td>50.0</td>
+      <td>25.0</td>
+      <td>90.0</td>
+      <td><b>$3.050</b></td>
+      <td>$1.900</td>
+      <td class="met">161%</td>
+    </tr><tr>
+      <td>2028</td>
+      <td>7</td>
+      <td>70.0</td>
+      <td>35.0</td>
+      <td>126.0</td>
+      <td><b>$4.270</b></td>
+      <td>$3.024</td>
+      <td class="met">141%</td>
+    </tr><tr>
+      <td>2029</td>
+      <td>10</td>
+      <td>100.0</td>
+      <td>50.0</td>
+      <td>180.0</td>
+      <td><b>$6.100</b></td>
+      <td>$5.100</td>
+      <td class="met">120%</td>
+    </tr><tr>
+      <td>2030</td>
+      <td>10</td>
+      <td>100.0</td>
+      <td>50.0</td>
+      <td>180.0</td>
+      <td><b>$6.100</b></td>
+      <td>$6.000</td>
+      <td class="met">102%</td>
+    </tr></tbody>
+  </table>
+
+  <div class="chart-wrap" style="margin-top:24px;"><canvas id="chartMix" style="box-sizing: border-box; display: block; height: 320px; width: 1158px;" width="1158" height="320"></canvas></div>
+
+  <div class="note">
+    Modelo basado en "Modelo de Escalamiento Comercial 2026–2030" (Estrategia Comercial UNAB).
+    Vendedores por año: 2026: 3 (1 planta + 2 externos) · 2027: 5 (1+4) · 2028: 7 (2+5) · 2029: 10 (2+8) · 2030: 10 (3+7).
+    Metas oficiales: 2026 $900MM · 2027 $1.900MM · 2028 $3.024MM · 2029 $5.100MM · 2030 $6.000MM.
+    El simulador permite ajustar la productividad individual (cursos básicos, premium y asesorías por vendedor/año) y los precios de referencia
+    para evaluar distintos escenarios de cumplimiento de las metas oficiales del plan de escalamiento.
+  </div>
+</div>
+
+</div>
+
+<script>
+const TEAM = [
+  {year:2026, planta:1, externos:2, total:3, meta:900},
+  {year:2027, planta:1, externos:4, total:5, meta:1900},
+  {year:2028, planta:2, externos:5, total:7, meta:3024},
+  {year:2029, planta:2, externos:8, total:10, meta:5100},
+  {year:2030, planta:3, externos:7, total:10, meta:6000},
+];
+
+const DEFAULTS = {cb:10, cp:5, as:18, pcb:3, pcp:8, pas:30};
+
+// Productividad por vendedor, independiente por año
+let yearProd = {};
+TEAM.forEach(t=>{ yearProd[t.year] = {cb:DEFAULTS.cb, cp:DEFAULTS.cp, as:DEFAULTS.as}; });
+let activeYear = TEAM[0].year;
+
+function buildYearSelector(){
+  const sel = $('yearSelector');
+  sel.innerHTML = TEAM.map(t=>`
+    <button class="yearBtn" data-year="${t.year}" style="
+      padding:8px 14px;border-radius:6px;border:1px solid var(--gold);
+      background:${t.year===activeYear?'var(--gold)':'transparent'};
+      color:${t.year===activeYear?'var(--navy-dark)':'var(--gold)'};
+      font-weight:bold;cursor:pointer;font-size:0.85rem;">${t.year}</button>
+  `).join('');
+  sel.querySelectorAll('.yearBtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeYear = parseInt(btn.dataset.year);
+      loadActiveYearToSliders();
+      buildYearSelector();
+      render();
+    });
+  });
+}
+
+function loadActiveYearToSliders(){
+  const p = yearProd[activeYear];
+  $('cb').value = p.cb;
+  $('cp').value = p.cp;
+  $('as').value = p.as;
+  $('cbVal').textContent = p.cb;
+  $('cpVal').textContent = p.cp;
+  $('asVal').textContent = p.as;
+}
+
+function saveSlidersToActiveYear(){
+  yearProd[activeYear] = {
+    cb: parseFloat($('cb').value),
+    cp: parseFloat($('cp').value),
+    as: parseFloat($('as').value)
+  };
+}
+
+function $(id){return document.getElementById(id);}
+
+function buildTeamTable(){
+  const body = $('teamBody');
+  body.innerHTML = TEAM.map(t=>`
+    <tr>
+      <td>${t.year}</td>
+      <td>${t.planta}</td>
+      <td>${t.externos}</td>
+      <td><b>${t.total}</b></td>
+      <td>$${t.meta.toLocaleString('es-CL')}</td>
+    </tr>`).join('');
+}
+
+let chartMain, chartMix;
+
+function calc(){
+  saveSlidersToActiveYear();
+
+  const p = yearProd[activeYear];
+  $('cbVal').textContent = p.cb;
+  $('cpVal').textContent = p.cp;
+  $('asVal').textContent = p.as.toFixed(1);
+
+  const pcb = parseFloat($('pcb').value) || 0;
+  const pcp = parseFloat($('pcp').value) || 0;
+  const pas = parseFloat($('pas').value) || 0;
+
+  const rows = TEAM.map(t=>{
+    const pr = yearProd[t.year];
+    const totalCb = t.total * pr.cb;
+    const totalCp = t.total * pr.cp;
+    const totalAs = t.total * pr.as;
+    const ingreso = totalCb*pcb + totalCp*pcp + totalAs*pas;
+    return {...t, totalCb, totalCp, totalAs, ingreso};
+  });
+
+  return rows;
+}
+
+function fmt(n){
+  return '$'+Math.round(n).toLocaleString('es-CL');
+}
+
+function render(){
+  const rows = calc();
+
+  // KPIs
+  const totalIngreso = rows.reduce((a,r)=>a+r.ingreso,0);
+  const totalMeta = rows.reduce((a,r)=>a+r.meta,0);
+  const cumplimiento = (totalIngreso/totalMeta*100);
+  const ticketProm = totalIngreso / rows.reduce((a,r)=>a+r.totalCb+r.totalCp+r.totalAs,0);
+
+  $('kpis').innerHTML = `
+    <div class="kpi"><div class="num">${fmt(totalIngreso)}MM</div><div class="lab">Ingreso proyectado total 2026–2030</div></div>
+    <div class="kpi"><div class="num">${fmt(totalMeta)}MM</div><div class="lab">Meta acumulada del plan</div></div>
+    <div class="kpi"><div class="num">${cumplimiento.toFixed(0)}%</div><div class="lab">Cumplimiento global del plan</div></div>
+    <div class="kpi"><div class="num">${ticketProm.toFixed(1)}MM</div><div class="lab">Ticket promedio por programa</div></div>
+  `;
+
+  // Detail table
+  $('detailBody').innerHTML = rows.map(r=>{
+    const cumple = r.ingreso >= r.meta;
+    const pct = (r.ingreso/r.meta*100).toFixed(0);
+    return `<tr>
+      <td>${r.year}</td>
+      <td>${r.total}</td>
+      <td>${r.totalCb.toFixed(1)}</td>
+      <td>${r.totalCp.toFixed(1)}</td>
+      <td>${r.totalAs.toFixed(1)}</td>
+      <td><b>${fmt(r.ingreso)}</b></td>
+      <td>${fmt(r.meta)}</td>
+      <td class="${cumple?'met':'unmet'}">${pct}%</td>
+    </tr>`;
+  }).join('');
+
+  // Main chart: projected vs meta
+  const labels = rows.map(r=>r.year);
+  const proyectado = rows.map(r=>Math.round(r.ingreso));
+  const meta = rows.map(r=>r.meta);
+
+  if(chartMain) chartMain.destroy();
+  chartMain = new Chart($('chartMain'), {
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {label:'Proyectado', data:proyectado, backgroundColor:'#C9A227'},
+        {label:'Meta', data:meta, backgroundColor:'rgba(255,255,255,0.15)', borderColor:'#fff', borderWidth:1}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#fff'}}},
+      scales:{
+        x:{ticks:{color:'#9fb3d1'}, grid:{color:'rgba(255,255,255,0.05)'}},
+        y:{ticks:{color:'#9fb3d1'}, grid:{color:'rgba(255,255,255,0.05)'}}
+      }
+    }
+  });
+
+  // Mix chart: stacked income composition by year
+  const ingCb = rows.map(r=>Math.round(r.totalCb * parseFloat($('pcb').value)));
+  const ingCp = rows.map(r=>Math.round(r.totalCp * parseFloat($('pcp').value)));
+  const ingAs = rows.map(r=>Math.round(r.totalAs * parseFloat($('pas').value)));
+
+  if(chartMix) chartMix.destroy();
+  chartMix = new Chart($('chartMix'), {
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {label:'Cursos básicos', data:ingCb, backgroundColor:'#1B2A4A'},
+        {label:'Cursos premium', data:ingCp, backgroundColor:'#3F5C8A'},
+        {label:'Asesorías', data:ingAs, backgroundColor:'#C0152C'},
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{labels:{color:'#fff'}},
+        title:{display:true, text:'Composición del ingreso proyectado por tipo de programa (MM$)', color:'#9fb3d1'}
+      },
+      scales:{
+        x:{stacked:true, ticks:{color:'#9fb3d1'}, grid:{display:false}},
+        y:{stacked:true, ticks:{color:'#9fb3d1'}, grid:{color:'rgba(255,255,255,0.05)'}}
+      }
+    }
+  });
+}
+
+function resetAll(){
+  TEAM.forEach(t=>{ yearProd[t.year] = {cb:DEFAULTS.cb, cp:DEFAULTS.cp, as:DEFAULTS.as}; });
+  $('pcb').value = DEFAULTS.pcb;
+  $('pcp').value = DEFAULTS.pcp;
+  $('pas').value = DEFAULTS.pas;
+  loadActiveYearToSliders();
+  render();
+}
+
+['cb','cp','as','pcb','pcp','pas'].forEach(id=>{
+  $(id).addEventListener('input', render);
+});
+
+buildTeamTable();
+buildYearSelector();
+loadActiveYearToSliders();
+render();
+
+</script>
+
+
+</body></html>
